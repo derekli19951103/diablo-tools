@@ -46,27 +46,29 @@ export const getDamageReduction = (
   console.log(params);
 
   const total_unique_damage_reduction =
-    unique_damage_reductions?.reduce((a, b) => a * (1 - b * 0.01), 1) || 1;
+    unique_damage_reductions?.reduce((a, b) => a * (1.0 - b * 0.01), 1.0) ||
+    1.0;
+
   let result = {
     close_damage_reduction:
-      1 *
-      (1 - close_damage_reduction * 0.01) *
-      (1 - class_damage_reduction * 0.01) *
-      (1 - overall_damage_reduction * 0.01) *
+      1.0 *
+      (1.0 - close_damage_reduction * 0.01) *
+      (1.0 - class_damage_reduction * 0.01) *
+      (1.0 - overall_damage_reduction * 0.01) *
       total_unique_damage_reduction,
     distant_damage_reduction:
-      1 *
-      (1 - distant_damage_reduction * 0.01) *
-      (1 - class_damage_reduction * 0.01) *
-      (1 - overall_damage_reduction * 0.01) *
+      1.0 *
+      (1.0 - distant_damage_reduction * 0.01) *
+      (1.0 - class_damage_reduction * 0.01) *
+      (1.0 - overall_damage_reduction * 0.01) *
       total_unique_damage_reduction,
   };
 
   if (is_fortified) {
     result.close_damage_reduction *=
-      0.9 * (1 - (fortitied_damage_reduction || 0) * 0.01);
+      0.9 * (1 - (fortitied_damage_reduction || 0.0) * 0.01);
     result.distant_damage_reduction *=
-      0.9 * (1 - (fortitied_damage_reduction || 0) * 0.01);
+      0.9 * (1 - (fortitied_damage_reduction || 0.0) * 0.01);
   }
 
   console.log(result);
