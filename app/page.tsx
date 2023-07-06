@@ -7,9 +7,8 @@ import {
   updated_damage_reduction_category,
 } from "@/helpers/reduction_formular";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Form, Space, Statistic, Switch } from "antd";
+import { Button, Form, Space, Statistic, Switch, InputNumber } from "antd";
 import { useForm } from "antd/es/form/Form";
-import TypedInputNumber from "antd/es/input-number";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -180,7 +179,7 @@ export default function Home() {
                       label="Fortified damage reduction"
                       name="fortitied_damage_reduction"
                     >
-                      <TypedInputNumber addonAfter="%" min={0} max={100} />
+                      <InputNumber addonAfter="%" min={0} max={100} />
                     </Form.Item>
                   )}
                 </>
@@ -191,25 +190,25 @@ export default function Home() {
               label="Close damage reduction"
               name="close_damage_reduction"
             >
-              <TypedInputNumber addonAfter="%" min={0} max={100} />
+              <InputNumber addonAfter="%" min={0} max={100} />
             </Form.Item>
             <Form.Item
               label="Distant damage reduction"
               name="distant_damage_reduction"
             >
-              <TypedInputNumber addonAfter="%" min={0} max={100} />
+              <InputNumber addonAfter="%" min={0} max={100} />
             </Form.Item>
             <Form.Item
               label="Overall damage reduction"
               name="overall_damage_reduction"
             >
-              <TypedInputNumber addonAfter="%" min={0} max={100} />
+              <InputNumber addonAfter="%" min={0} max={100} />
             </Form.Item>
             <Form.Item
               label="Class damage reduction"
               name="class_damage_reduction"
             >
-              <TypedInputNumber addonAfter="%" min={0} max={100} />
+              <InputNumber addonAfter="%" min={0} max={100} />
             </Form.Item>
 
             <Form.List name="unique_damage_reductions">
@@ -225,7 +224,7 @@ export default function Home() {
                           { required: true, message: "Missing percentage" },
                         ]}
                       >
-                        <TypedInputNumber addonAfter="%" min={0} max={100} />
+                        <InputNumber addonAfter="%" min={0} max={100} />
                       </Form.Item>
 
                       <MinusCircleOutlined onClick={() => remove(field.name)} />
@@ -264,7 +263,7 @@ export default function Home() {
             Extra damage reduction about to be applied
           </div>
 
-          <TypedInputNumber
+          <InputNumber
             addonAfter="%"
             min={0}
             max={100}
