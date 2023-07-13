@@ -1,153 +1,25 @@
 "use client";
-import {
-  DamageReductionResult,
-  ReductionFormularParams,
-  displayPercentage,
-  getDamageReduction,
-} from "@/helpers/reduction_formular";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Form, InputNumber, Space, Statistic, Switch } from "antd";
-import { useForm } from "antd/es/form/Form";
-import { useEffect, useState } from "react";
+import { DRCalculator } from "@/component/DRCalculator";
+import { Adsense } from "@ctrl/react-adsense";
+import { ConfigProvider, theme } from "antd";
 
 export default function Home() {
-  const [form] = useForm<ReductionFormularParams>();
-
-  const [damageReduction, setDamageReduction] = useState<DamageReductionResult>(
-    {
-      close_damage_taken: 1,
-      distant_damage_taken: 1,
-    }
-  );
-
-  useEffect(() => {
-    form.setFieldsValue({
-      close_damage_reduction: 0,
-      distant_damage_reduction: 0,
-      overall_damage_reduction: 0,
-      class_damage_reduction: 0,
-      fortitied_damage_reduction: 0,
-    });
-  }, []);
-
   return (
-    <div
-      style={{
-        backgroundImage: "url(/background.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+    <ConfigProvider
+      theme={{
+        algorithm: theme.darkAlgorithm,
       }}
-      className="h-screen"
     >
-      <div className="grid grid-rows-2 gap-1 h-screen">
-        <div className="bg-gray-300 p-5 m-5 rounded opacity-75">
-          <Form
-            layout="horizontal"
-            onValuesChange={(_, values) => {
-              console.log(values);
-              setDamageReduction(getDamageReduction(values));
-            }}
-            form={form}
-          >
-            <Form.Item
-              label="Fortified"
-              name="is_fortified"
-              valuePropName="checked"
-            >
-              <Switch />
-            </Form.Item>
-            <Form.Item
-              noStyle
-              shouldUpdate={(prevValues, curValues) =>
-                prevValues.is_fortified !== curValues.is_fortified
-              }
-            >
-              {() => (
-                <>
-                  {form.getFieldValue("is_fortified") && (
-                    <Form.Item
-                      label="Fortified damage reduction"
-                      name="fortitied_damage_reduction"
-                    >
-                      <InputNumber addonAfter="%" min={0} max={100} />
-                    </Form.Item>
-                  )}
-                </>
-              )}
-            </Form.Item>
-
-            <Form.Item
-              label="Close damage reduction"
-              name="close_damage_reduction"
-            >
-              <InputNumber addonAfter="%" min={0} max={100} />
-            </Form.Item>
-            <Form.Item
-              label="Distant damage reduction"
-              name="distant_damage_reduction"
-            >
-              <InputNumber addonAfter="%" min={0} max={100} />
-            </Form.Item>
-            <Form.Item
-              label="Overall damage reduction"
-              name="overall_damage_reduction"
-            >
-              <InputNumber addonAfter="%" min={0} max={100} />
-            </Form.Item>
-            <Form.Item
-              label="Class damage reduction"
-              name="class_damage_reduction"
-            >
-              <InputNumber addonAfter="%" min={0} max={100} />
-            </Form.Item>
-
-            <Form.List name="unique_damage_reductions">
-              {(fields, { add, remove }) => (
-                <>
-                  {fields.map((field) => (
-                    <Space key={field.key} align="baseline">
-                      <Form.Item
-                        {...field}
-                        label="Unique damage reduction"
-                        name={[field.name]}
-                        rules={[
-                          { required: true, message: "Missing percentage" },
-                        ]}
-                      >
-                        <InputNumber addonAfter="%" min={0} max={100} />
-                      </Form.Item>
-
-                      <MinusCircleOutlined onClick={() => remove(field.name)} />
-                    </Space>
-                  ))}
-
-                  <Form.Item>
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      block
-                      icon={<PlusOutlined />}
-                    >
-                      Add Unique Damage Reduction
-                    </Button>
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-          </Form>
-        </div>
-
-        <div className="bg-gray-300 p-5 m-5 rounded opacity-75">
-          <Statistic
-            title="Damage reduction from close enemies"
-            value={displayPercentage(damageReduction?.close_damage_taken)}
-          />
-          <Statistic
-            title="Damage reduction from distant enemies"
-            value={displayPercentage(damageReduction?.distant_damage_taken)}
-          />
+      <div className="w-full">
+        <div className="grid grid-col-3">
+          <div className="">
+            <Adsense client="ca-pub-5961109963651073" slot="1134980782" />
+          </div>
+          <div className="col-span-2">
+            <DRCalculator />
+          </div>
         </div>
       </div>
-    </div>
+    </ConfigProvider>
   );
 }

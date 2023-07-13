@@ -1,6 +1,7 @@
 import "./globals.css";
 import "antd/dist/reset.css";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script
+        async={true}
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      />
       <body className={inter.className}>{children}</body>
     </html>
   );
