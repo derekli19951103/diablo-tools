@@ -32,117 +32,147 @@ export const DRCalculator = () => {
   return (
     <div>
       <div
-        className="p-5 m-5 rounded"
-        style={{ backgroundImage: "url(/background.png)" }}
+        style={{
+          padding: 20,
+          marginBottom: 80,
+          backgroundImage: "url(/background.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          borderRadius: 10,
+          boxShadow: `0 0 .2rem #fff,
+          0 0 .2rem #fff,
+          0 0 2rem #d3d3d3,
+          0 0 0.8rem #d3d3d3,
+          0 0 2.8rem #d3d3d3,
+          inset 0 0 1.3rem #d3d3d3`,
+        }}
       >
-        <Form
-          layout="horizontal"
-          onValuesChange={(_, values) => {
-            console.log(values);
-            setDamageReduction(getDamageReduction(values));
-          }}
-          form={form}
-        >
-          <Form.Item
-            label="Fortified"
-            name="is_fortified"
-            valuePropName="checked"
+        <div style={{ backdropFilter: "blur(5px)" }}>
+          <Form
+            layout="horizontal"
+            onValuesChange={(_, values) => {
+              console.log(values);
+              setDamageReduction(getDamageReduction(values));
+            }}
+            form={form}
           >
-            <Switch />
-          </Form.Item>
-          <Form.Item
-            noStyle
-            shouldUpdate={(prevValues, curValues) =>
-              prevValues.is_fortified !== curValues.is_fortified
-            }
-          >
-            {() => (
-              <>
-                {form.getFieldValue("is_fortified") && (
-                  <Form.Item
-                    label="Fortified damage reduction"
-                    name="fortitied_damage_reduction"
-                  >
-                    <InputNumber addonAfter="%" min={0} max={100} />
-                  </Form.Item>
-                )}
-              </>
-            )}
-          </Form.Item>
-
-          <Form.Item
-            label="Close damage reduction"
-            name="close_damage_reduction"
-          >
-            <InputNumber addonAfter="%" min={0} max={100} />
-          </Form.Item>
-          <Form.Item
-            label="Distant damage reduction"
-            name="distant_damage_reduction"
-          >
-            <InputNumber addonAfter="%" min={0} max={100} />
-          </Form.Item>
-          <Form.Item
-            label="Overall damage reduction"
-            name="overall_damage_reduction"
-          >
-            <InputNumber addonAfter="%" min={0} max={100} />
-          </Form.Item>
-          <Form.Item
-            label="Class damage reduction"
-            name="class_damage_reduction"
-          >
-            <InputNumber addonAfter="%" min={0} max={100} />
-          </Form.Item>
-
-          <Form.List name="unique_damage_reductions">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map((field) => (
-                  <Space key={field.key} align="baseline">
+            <Form.Item
+              label="Fortified"
+              name="is_fortified"
+              valuePropName="checked"
+            >
+              <Switch />
+            </Form.Item>
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, curValues) =>
+                prevValues.is_fortified !== curValues.is_fortified
+              }
+            >
+              {() => (
+                <>
+                  {form.getFieldValue("is_fortified") && (
                     <Form.Item
-                      {...field}
-                      label="Unique damage reduction"
-                      name={[field.name]}
-                      rules={[
-                        { required: true, message: "Missing percentage" },
-                      ]}
+                      label="Fortified damage reduction"
+                      name="fortitied_damage_reduction"
                     >
                       <InputNumber addonAfter="%" min={0} max={100} />
                     </Form.Item>
+                  )}
+                </>
+              )}
+            </Form.Item>
 
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                  </Space>
-                ))}
+            <Form.Item
+              label="Close damage reduction"
+              name="close_damage_reduction"
+            >
+              <InputNumber addonAfter="%" min={0} max={100} />
+            </Form.Item>
+            <Form.Item
+              label="Distant damage reduction"
+              name="distant_damage_reduction"
+            >
+              <InputNumber addonAfter="%" min={0} max={100} />
+            </Form.Item>
+            <Form.Item
+              label="Overall damage reduction"
+              name="overall_damage_reduction"
+            >
+              <InputNumber addonAfter="%" min={0} max={100} />
+            </Form.Item>
+            <Form.Item
+              label="Class damage reduction"
+              name="class_damage_reduction"
+            >
+              <InputNumber addonAfter="%" min={0} max={100} />
+            </Form.Item>
 
-                <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
-                    Add Unique Damage Reduction
-                  </Button>
-                </Form.Item>
-              </>
-            )}
-          </Form.List>
-        </Form>
+            <Form.List name="unique_damage_reductions">
+              {(fields, { add, remove }) => (
+                <>
+                  {fields.map((field) => (
+                    <Space key={field.key} align="baseline">
+                      <Form.Item
+                        {...field}
+                        label="Unique damage reduction"
+                        name={[field.name]}
+                        rules={[
+                          { required: true, message: "Missing percentage" },
+                        ]}
+                      >
+                        <InputNumber addonAfter="%" min={0} max={100} />
+                      </Form.Item>
+
+                      <MinusCircleOutlined onClick={() => remove(field.name)} />
+                    </Space>
+                  ))}
+
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      block
+                      icon={<PlusOutlined />}
+                    >
+                      Add Unique Damage Reduction
+                    </Button>
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
+          </Form>
+        </div>
       </div>
 
       <div
-        className="p-5 m-5 rounded"
-        style={{ backgroundImage: "url(/background.png)" }}
+        style={{
+          padding: 20,
+          marginBottom: 20,
+          backgroundImage: "url(/background.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          borderRadius: 10,
+          boxShadow: `0 0 .2rem #fff,
+          0 0 .2rem #fff,
+          0 0 2rem #d3d3d3,
+          0 0 0.8rem #d3d3d3,
+          0 0 2.8rem #d3d3d3,
+          inset 0 0 1.3rem #d3d3d3`,
+        }}
       >
-        <Statistic
-          title="Damage reduction from close enemies"
-          value={displayPercentage(damageReduction?.close_damage_taken)}
-        />
-        <Statistic
-          title="Damage reduction from distant enemies"
-          value={displayPercentage(damageReduction?.distant_damage_taken)}
-        />
+        <div style={{ backdropFilter: "blur(5px)" }}>
+          <Statistic
+            title="Damage reduction from close enemies"
+            value={displayPercentage(damageReduction?.close_damage_taken)}
+          />
+          <Statistic
+            title="Damage reduction from distant enemies"
+            value={displayPercentage(damageReduction?.distant_damage_taken)}
+          />
+        </div>
       </div>
     </div>
   );
